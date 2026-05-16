@@ -1,0 +1,2 @@
+This is a plain text note file.
+Useful for testing rename operations.
