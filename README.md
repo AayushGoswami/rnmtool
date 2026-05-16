@@ -1,5 +1,4 @@
 # 🗂️ rnmtool - File Rename Utility
-
 > A powerful, **zero-dependency**, cross-platform CLI for batch renaming files - with a safe dry-run preview.
 
 ![PyPI version](https://img.shields.io/pypi/v/rnmtool)
@@ -7,6 +6,8 @@
 ![License](https://img.shields.io/github/license/AayushGoswami/rnmtool)
 ![CI](https://img.shields.io/github/actions/workflow/status/AayushGoswami/rnmtool/ci.yml?label=CI)
 ![Stars](https://img.shields.io/github/stars/AayushGoswami/rnmtool?style=social)
+
+![rnmtool demo](assets/demo.gif)
 
 ```bash
 pipx install rnmtool
