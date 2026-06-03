@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/rnmtool/__init__.py
+src/rnmtool/__main__.py
+src/rnmtool.egg-info/PKG-INFO
+src/rnmtool.egg-info/SOURCES.txt
+src/rnmtool.egg-info/dependency_links.txt
+src/rnmtool.egg-info/entry_points.txt
+src/rnmtool.egg-info/top_level.txt
+tests/test_rename.py
