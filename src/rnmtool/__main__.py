@@ -203,6 +203,12 @@ def main() -> None:
             and args.ext is None and args.case is None and not args.dry_run:
         parser.error("No transformation specified. Use --help for usage or --dry-run to preview files.")
 
+    if args.regex and args.find is not None:
+        try:
+            re.compile(args.find)
+        except re.error as exc:
+            parser.error(f"Invalid regular expression for --find: {exc}")
+
     run(args)
 
 
