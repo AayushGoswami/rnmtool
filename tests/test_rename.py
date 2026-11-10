@@ -13,7 +13,7 @@ from pathlib import Path
 
 # Allow importing from src/ layout without installing
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-from rnmtool.__main__ import apply_transformations, collect_files
+from rnmtool.__main__ import apply_transformations, collect_files, main
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -117,3 +117,27 @@ class TestCombined:
         args = make_args(find=" ", replace="_", case="lower",
                          prefix="pre_", suffix="_suf", ext=".md")
         assert apply_transformations("Hello World.txt", args) == "pre_hello_world_suf.md"
+
+
+class TestInvalidRegex:
+    def test_invalid_regex_exits_with_usage_error(self, tmp_path, monkeypatch, capsys):
+        (tmp_path / "a.txt").write_text("hello")
+        monkeypatch.setattr(
+            sys, "argv",
+            ["rnmtool", str(tmp_path), "--regex", "--find", "[", "--dry-run"],
+        )
+        with pytest.raises(SystemExit) as exc_info:
+            main()
+        assert exc_info.value.code == 2
+        _, err = capsys.readouterr()
+        assert "Invalid regular expression" in err
+
+    def test_valid_regex_dry_run_does_not_exit(self, tmp_path, monkeypatch, capsys):
+        (tmp_path / "a.txt").write_text("hello")
+        monkeypatch.setattr(
+            sys, "argv",
+            ["rnmtool", str(tmp_path), "--regex", "--find", r"\d+", "--dry-run"],
+        )
+        main()  # must not raise
+        out, _ = capsys.readouterr()
+        assert "DRY RUN" in out
